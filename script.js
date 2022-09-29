@@ -1,1 +1,3 @@
-const fetch = require('node-fetch');
+import "node-fetch";
+
+console.log("It works");
