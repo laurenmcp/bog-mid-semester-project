@@ -1,6 +1,8 @@
+
+
 h1 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 64;
+    font-size: 90;
     text-align: center;
 }
 
@@ -9,9 +11,17 @@ h2 {
     font-size: 36;
     text-align: center;
     font-weight: 700;
-    text-align: left;
 }
 
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 40;
+    font-weight: 400;
+    line-height: 44px;
+
+
+}
 
 h3 {
     font-family: Arial, Helvetica, sans-serif;
@@ -21,14 +31,21 @@ h3 {
 }
 
 
-.body {
+.body2 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    
+}
+
+body {
+    margin: 50px;
+    border-style: solid;
+    border-width: 4px;
+    max-width: 1440px;
 }
 
 .col1 {
+    margin: 20px;
     background-color: white;
     width: 50%;
     display: flex;
@@ -38,20 +55,29 @@ h3 {
 }
 
 .col2 {
+    margin: 20px;
     background-color: white;
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    row-gap: 25px;
 }
 
 #imageBox {
-    width: 450px;
-    height: 450px;
+    width: 463px;
+    height: 463px;
     border-style: solid;
     border-color: black;
     border-width: 4px;
 }
 
+#image {
+    width: 463px;
+}
+
 #pokeName {
-    width: 450px;
+    width: 463px;
     height: 75px;
     background-color: #E8E8E8;
     border-style: solid;
@@ -61,12 +87,26 @@ h3 {
 }
 
 #typeBox {
-    width: 450px;
-    
+    width: 463px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
+#tBubble {
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 10px;
+    width: 100px;
+    height: 41px;
+}
+
+
 #arrowBox {
-    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 30px;
 }
 
 button {
@@ -75,3 +115,103 @@ button {
     height: 70px;
     border-radius: 5px;
 }
+
+#panelBox {
+    width: 463px;
+    height: 550px;
+    background-color: #E8E8E8;
+}
+
+#arrowR {
+    background-color: #E8E8E8;
+}
+.normal {
+    background-color: #A8A77A;
+}
+
+.fire {
+    background-color: #EE8130
+}
+
+.water {
+    background-color: #6390F0;
+}
+
+.electric {
+    background-color: #F7D02C;
+}
+
+.grass {
+    background-color: #7AC74C;
+}
+
+.ice {
+    background-color: #96D9D6;
+}
+
+.fighting {
+    background-color: #C22E28;
+}
+
+.poison {
+    background-color: #A33EA1;
+}
+
+.ground {
+    background-color: #E2BF65;
+}
+
+.flying {
+    background-color: #A98FF3;
+}
+
+.psychic {
+    background-color: #F95587;
+}
+
+.bug {
+    background-color: #A6B91A;
+}
+
+.rock {
+    background-color: #B6A136;
+}
+
+.ghost {
+    background-color: #B6A136;
+}
+
+.dragon {
+    background-color: #6F35FC;
+}
+
+.dark {
+    background-color: #705746;
+}
+
+.steel {
+    background-color: #B7B7CE;
+}
+
+.fairy {
+    background-color: #d685ad;
+}
+
+Normal Type: A8A77A
+Fire Type: EE8130
+Water Type: 6390F0
+Electric Type: F7D02C
+Grass Type: 7AC74C
+Ice Type: 96D9D6
+Fighting Type: C22E28
+Poison Type: A33EA1
+Ground Type: E2BF65
+Flying Type: A98FF3
+Psychic Type: F95587
+Bug Type: A6B91A
+Rock Type: B6A136
+Ghost Type: 735797
+Dragon Type: 6F35FC
+Dark Type: 705746
+Steel Type: B7B7CE
+Fairy Type: D685AD
