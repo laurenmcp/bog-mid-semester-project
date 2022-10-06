@@ -13,9 +13,6 @@
 
 //sprites other official artwork --> bracket notation
 
-
-
-
 var pokemon;
 var pokeIndex = 1;
 var pokeLocation = "https://pokeapi.co/api/v2/pokemon/";
@@ -64,10 +61,14 @@ async function updateUp(url) {
     setImage(pokemon.sprites.front_default);
     setName(pokemon.name);
     setTypes(pokemon);
-    
+    buildInfoMenu(pokemon);
+
+
     } catch (err) {
-    console.log(err);
+        console.log(err);
     }
+    
+    
 }
 
 /**
@@ -137,19 +138,40 @@ function setTypes(pokemon) {
     console.log(document.getElementById("typeBox"));
     let i = 0;
     while (i < typeArr.length) {
-        
         let type = typeArr[i].type.name;
         console.log(type)
         let typeBubble = document.createElement("div"); 
         typeBubble.id = "tBubble";
         let typeIndividual = document.createElement("div");
         let typeText = document.createTextNode(type);
+        typeIndividual.classList.add("typeLabel");
         typeIndividual.appendChild(typeText);
-
         typeBubble.appendChild(typeIndividual);
         typeBubble.classList.add(type);
         boxOfTypes.appendChild(typeBubble);
         i++;
     }
+}
 
+function buildInfoMenu() {
+    let menu = document.getElementById('panelBox');
+    console.log(menu);
+    menu.innerHTML = "";
+    var items = ["height: " + pokemon.height, "weight: " + pokemon.weight];
+    var startArr = pokemon.stats;
+    for (var i = 0; i < startArr.length; i++){
+        items.push(startArr[i].stat.name + ": " + startArr[i].base_stat)
+    }
+    console.log(items);
+    for (i = 0; i < items.length; i++) {
+        let item = document.createElement("p"); 
+        let text = document.createTextNode(items[i]);
+        item.appendChild(text);
+        menu.appendChild(item);
+    }
+    console.log(menu);
+}
+
+function buildMovesMenu() {
+    console.log("building moves menu");
 }
