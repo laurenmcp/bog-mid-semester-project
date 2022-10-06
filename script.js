@@ -13,11 +13,19 @@
 
 //sprites other official artwork --> bracket notation
 
+//need to figure out how to get pokeindex to not get to low
+
 var pokemon;
 var pokeIndex = 1;
 var pokeLocation = "https://pokeapi.co/api/v2/pokemon/";
 var showMoves = false;
 var showInfo = true;
+
+let test = document.getElementById("info");
+test.style.backgroundColor =  "#7CFF79";
+
+
+
 
 document.body.onload = loadBulbasaur();
 
@@ -35,9 +43,26 @@ arrowL.addEventListener("click", () => {
         updateDown(pokeLocation + (pokeIndex - 1));
 });
 
+var moves = document.getElementById("moves");
+moves.addEventListener("click", () => {
+    console.log("move button clicked");
+    showInfo = false;
+    showMoves = true;
+    buildMovesMenu();
+});
+
+var info = document.getElementById("info");
+info.addEventListener("click", () => {
+    console.log("info button clicked");
+    showInfo = true;
+    showMoves = false;
+    buildInfoMenu();
+});
+
 function loadBulbasaur() {
     console.log("loadBulbasaur is running.");
     updateUp(pokeLocation + pokeIndex);
+
 }
 
 async function getPokemonData(url) {
@@ -54,28 +79,29 @@ async function getPokemonData(url) {
 async function updateUp(url) {
     console.log("updateUp is running.");
     try {
-    await getPokemonData(url);
-    console.log(pokemon);
-    pokeIndex++;
-    console.log(pokeIndex);
-    setImage(pokemon.sprites.front_default);
-    setName(pokemon.name);
-    setTypes(pokemon);
-    buildInfoMenu(pokemon);
-
-
+        await getPokemonData(url);
+        console.log(pokemon);
+        pokeIndex++;
+        console.log(pokeIndex);
+        setImage(pokemon.sprites.front_default);
+        // setImage(pokemon.sprites.other.official-artwork);
+        setName(pokemon.name);
+        setTypes(pokemon);
+    if (showInfo) {
+        buildInfoMenu();
+    } else {
+        buildMovesMenu();
+    }
     } catch (err) {
         console.log(err);
-    }
-    
-    
+    }   
 }
 
 /**
  * decrements pokeIndex to revert to previous pokemon
  */
 async function updateDown(url) {
-    pokeIndex--;
+        pokeIndex--;
     if (!pokeIndex <= 0) {
         console.log("updateDown is running.");
         try {
@@ -84,6 +110,12 @@ async function updateDown(url) {
             console.log(pokeIndex);
             setImage(pokemon.sprites.front_default);
             setName(pokemon.name);
+            setTypes(pokemon);
+            if (showInfo) {
+                buildInfoMenu();
+            } else {
+                buildMovesMenu();
+            }
         } catch (err) {
             console.log(err);
         }
@@ -154,6 +186,7 @@ function setTypes(pokemon) {
 }
 
 function buildInfoMenu() {
+    switchColors(document.getElementById("info"), document.getElementById("moves"));
     let menu = document.getElementById('panelBox');
     console.log(menu);
     menu.innerHTML = "";
@@ -163,15 +196,36 @@ function buildInfoMenu() {
         items.push(startArr[i].stat.name + ": " + startArr[i].base_stat)
     }
     console.log(items);
+    replacePanelContent(menu, items);
+    console.log(menu);
+}
+
+function buildMovesMenu() {
+    switchColors(document.getElementById("moves"), document.getElementById("info"));
+    console.log("building moves menu");
+    let menu = document.getElementById('panelBox');
+    menu.innerHtml = "";
+    var items = [];
+    var startArr = pokemon.moves;
+    console.log(startArr);
+    for (var i = 0; i < startArr.length; i++){
+        items.push(startArr[i].move.name)
+    }
+    console.log(items);
+    replacePanelContent(menu, items);
+}
+
+function replacePanelContent(menu, items) {
     for (i = 0; i < items.length; i++) {
         let item = document.createElement("p"); 
         let text = document.createTextNode(items[i]);
         item.appendChild(text);
         menu.appendChild(item);
     }
-    console.log(menu);
 }
 
-function buildMovesMenu() {
-    console.log("building moves menu");
+function switchColors(greenButton, greyButton) {
+    greenButton.style.backgroundColor =  "#7CFF79";
+    greyButton.style.backgroundColor = "#E8E8E8";
 }
+
