@@ -1,20 +1,3 @@
-
-
- /*essentially a get request, pull from pokemon API */
- /*each ability inside own object*/
- /*html elements - buttons */
- 
-
-// fetch('https://pokeapi.co/api/v2/pokemon/300')
-//     .then((resp) => resp.json())
-//     .then((data) => console.log(data));
-
-//overflow scroll
-
-//sprites other official artwork --> bracket notation
-
-//need to figure out how to get pokeindex to not get to low
-
 var pokemon;
 var pokeIndex = 1;
 var pokeLocation = "https://pokeapi.co/api/v2/pokemon/";
@@ -184,7 +167,7 @@ function buildInfoMenu() {
     let menu = document.getElementById('panelBox');
     // menu.innerHTML = "";
     clear(menu);
-    var items = ["height: " + Math.round(pokemon.height * 0.1 * 10) / 10 + "m", "weight: " + pokemon.weight + "kg"];
+    var items = ["height: " + Math.round(pokemon.height * 0.1 * 10) / 10 + "m", "weight: " + (pokemon.weight / 10) + "kg"];
     var startArr = pokemon.stats;
     for (var i = 0; i < startArr.length; i++){
         items.push(startArr[i].stat.name + ": " + startArr[i].base_stat)

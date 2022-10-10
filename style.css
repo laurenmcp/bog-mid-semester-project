@@ -1,3 +1,4 @@
+
 h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 64px;
@@ -63,6 +64,7 @@ body {
     border-style: solid;
     border-color: black;
     border-width: 4px;
+    margin-top: 40px;
 }
 
 #image {
@@ -111,6 +113,8 @@ body {
     flex-direction: row;
     gap: 320px;
     padding-left: 160px;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 #arrowBox {
@@ -146,8 +150,8 @@ body {
 }
 
 #panelBox {
-    width: 486px;
-    height: 598px;
+    width: 440px;
+    height: 500px;
     padding: 33px;
     background-color: #E8E8E8;
     display: flex;
