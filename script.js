@@ -20,15 +20,7 @@ var pokeIndex = 1;
 var pokeLocation = "https://pokeapi.co/api/v2/pokemon/";
 var showMoves = false;
 var showInfo = true;
-
-let test = document.getElementById("info");
-test.style.backgroundColor =  "#7CFF79";
-
-
-
-
 document.body.onload = loadBulbasaur();
-
 console.log(pokeIndex);
 
 var arrowR = document.getElementById("rightArrow");
@@ -40,7 +32,9 @@ arrowR.addEventListener("click", () => {
 var arrowL = document.getElementById("leftArrow");
 arrowL.addEventListener("click", () => {
         console.log("left arrow click triggered");
+        if (pokeIndex > 1) {
         updateDown(pokeLocation + (pokeIndex - 1));
+        }
 });
 
 var moves = document.getElementById("moves");
@@ -83,8 +77,7 @@ async function updateUp(url) {
         console.log(pokemon);
         pokeIndex++;
         console.log(pokeIndex);
-        setImage(pokemon.sprites.front_default);
-        // setImage(pokemon.sprites.other.official-artwork);
+        setImage(pokemon.sprites.other["official-artwork"].front_default);
         setName(pokemon.name);
         setTypes(pokemon);
     if (showInfo) {
@@ -108,7 +101,7 @@ async function updateDown(url) {
             await getPokemonData(url);
             console.log(pokemon);
             console.log(pokeIndex);
-            setImage(pokemon.sprites.front_default);
+            setImage(pokemon.sprites.other["official-artwork"].front_default);
             setName(pokemon.name);
             setTypes(pokemon);
             if (showInfo) {
@@ -187,32 +180,39 @@ function setTypes(pokemon) {
 
 function buildInfoMenu() {
     switchColors(document.getElementById("info"), document.getElementById("moves"));
+    switchTitle(document.getElementById("panelTitle"), "Info");
     let menu = document.getElementById('panelBox');
-    console.log(menu);
-    menu.innerHTML = "";
-    var items = ["height: " + pokemon.height, "weight: " + pokemon.weight];
+    // menu.innerHTML = "";
+    clear(menu);
+    var items = ["height: " + Math.round(pokemon.height * 0.1 * 10) / 10 + "m", "weight: " + pokemon.weight + "kg"];
     var startArr = pokemon.stats;
     for (var i = 0; i < startArr.length; i++){
         items.push(startArr[i].stat.name + ": " + startArr[i].base_stat)
     }
-    console.log(items);
     replacePanelContent(menu, items);
-    console.log(menu);
 }
 
 function buildMovesMenu() {
     switchColors(document.getElementById("moves"), document.getElementById("info"));
-    console.log("building moves menu");
+    switchTitle(document.getElementById("panelTitle"), "Moves");
     let menu = document.getElementById('panelBox');
-    menu.innerHtml = "";
+    // menu.innerHtml = "";
+    clear(menu);
     var items = [];
-    var startArr = pokemon.moves;
-    console.log(startArr);
-    for (var i = 0; i < startArr.length; i++){
-        items.push(startArr[i].move.name)
+    console.log(items);
+    var arr = pokemon.moves;
+    console.log(arr);
+    for (var i = 0; i < arr.length; i++){
+        items.push(arr[i].move.name)
     }
     console.log(items);
     replacePanelContent(menu, items);
+}
+
+function clear(el) {
+    while(el.lastChild) {
+        el.removeChild(el.lastChild);
+    }
 }
 
 function replacePanelContent(menu, items) {
@@ -224,8 +224,15 @@ function replacePanelContent(menu, items) {
     }
 }
 
+function switchTitle(cur, to) {
+    clear(cur);
+    let newHeader = document.createElement("p");
+    let newTitle = document.createTextNode(to);
+    newHeader.appendChild(newTitle);
+    cur.appendChild(newHeader);
+}
+
 function switchColors(greenButton, greyButton) {
     greenButton.style.backgroundColor =  "#7CFF79";
     greyButton.style.backgroundColor = "#E8E8E8";
 }
-
